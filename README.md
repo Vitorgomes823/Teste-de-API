@@ -69,7 +69,6 @@ Falha na conexão com a API: ConnectionError(...)
 ---
 
 ## 📌 **Notas Importantes**  
-⚠️ **Nunca exponha sua chave de API publicamente** (evite commits com `api_key` no GitHub).  
 💡 Caso a API esteja indisponível, verifique o [status oficial do DeepSeek](https://status.deepseek.com).  
 
 ---
