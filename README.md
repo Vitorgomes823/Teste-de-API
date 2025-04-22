@@ -1,7 +1,3 @@
-Claro! Aqui está um exemplo de `README.md` bem explicativo para esse script:
-
----
-
 # Teste da API DeepSeek
 
 Este repositório contém um script Python com o objetivo de testar a API do [DeepSeek](https://deepseek.com/), utilizando uma chave de API privada e a biblioteca `requests`.
