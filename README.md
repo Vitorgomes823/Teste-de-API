@@ -38,7 +38,7 @@ DEEPSEEK_API_KEY=sua_chave_aqui
 ### Execução
 
 ```bash
-python script_teste_deepseek.py
+python Teste de API.py
 ```
 
 ## 📦 Exemplo de resposta esperada
