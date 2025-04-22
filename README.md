@@ -1,81 +1,68 @@
-# 📝 README - Teste da API DeepSeek
+Claro! Aqui está um exemplo de `README.md` bem explicativo para esse script:
 
-## 🔍 Visão Geral
-Este script Python realiza uma integração básica com a API do DeepSeek Chat, enviando uma mensagem simples e recebendo uma resposta.
+---
 
-## 🛠️ Funcionamento do Código
+# Teste da API DeepSeek
 
-### 📚 Bibliotecas Utilizadas
-- `os`: Para acessar variáveis de ambiente
-- `requests`: Para fazer requisições HTTP
-- `python-dotenv`: Para carregar variáveis de um arquivo `.env`
+Este repositório contém um script Python com o objetivo de testar a API do [DeepSeek](https://deepseek.com/), utilizando uma chave de API privada e a biblioteca `requests`.
 
-### ⚙️ Fluxo Principal
-1. **Configuração Inicial**:
-   - Carrega variáveis do arquivo `.env` usando `load_dotenv()`
-   - Obtém a chave da API com `os.getenv("DEEPSEEK_API_KEY")`
+## 📋 O que o script faz?
 
-2. **Preparação da Requisição**:
-   - Define os cabeçalhos (headers) com a autorização Bearer Token
-   - Monta o payload (corpo da requisição) com:
-     - Modelo: `deepseek-chat`
-     - Mensagem: "Olá, DeepSeek!"
+1. **Carrega variáveis de ambiente** do arquivo `.env`, especificamente a chave `DEEPSEEK_API_KEY`.
+2. **Envia uma requisição POST** para o endpoint de chat da API DeepSeek (`https://api.deepseek.com/chat/completions`) com uma mensagem simples.
+3. **Trata e exibe o resultado da resposta**, explicando o que significa cada código de status retornado (ex: 200, 401, 500, etc).
+4. **Exibe mensagens informativas** e amigáveis para facilitar o entendimento de erros comuns de API.
 
-3. **Envio e Tratamento da Resposta**:
-   - Faz uma requisição POST para `https://api.deepseek.com/chat/completions`
-   - Trata três cenários:
-     - Sucesso (status 200): exibe a resposta JSON
-     - Erro da API: exibe o código e mensagem de erro
-     - Erro de conexão: exibe a exceção
+## 🧪 Como executar o script
 
-## 🚀 Como Usar
+### Pré-requisitos
 
-1. **Instale as dependências**:
-   ```bash
-   pip install requests python-dotenv
-   ```
+- Python 3.x instalado
+- `pip` configurado
+- Um arquivo `.env` com a variável `DEEPSEEK_API_KEY` definida
 
-2. **Crie um arquivo `.env`** na raiz do projeto:
-   ```env
-   DEEPSEEK_API_KEY="sua_chave_aqui"
-   ```
+### Instalação de dependências
 
-3. **Execute o script**:
-   ```bash
-   python nome_do_script.py
-   ```
-
-## ⚠️ Importante
-- Mantenha seu arquivo `.env` seguro e fora do controle de versão
-- Adicione `.env` ao seu `.gitignore`
-- Nunca compartilhe sua chave de API publicamente
-
-## 📊 Saídas Esperadas
-
-✅ **Resposta de sucesso**:
-```json
-Resposta: {
-  "id": "chatcmpl-123",
-  "object": "chat.completion",
-  "choices": [...],
-  "usage": {...}
-}
+```bash
+pip install requests python-dotenv
 ```
 
-❌ **Possíveis erros**:
-- `401 Unauthorized`: Chave API inválida
-- `429 Too Many Requests`: Limite de requisições excedido
-- `ConnectionError`: Problemas de conexão com a API
+### Estrutura do `.env`
 
-## 📁 Estrutura Recomendada
-```
-projeto/
-├── .env            # Arquivo com sua chave (local apenas)
-├── .gitignore      # Deve conter `.env`
-└── script.py       # Este código
+Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
+
+```env
+DEEPSEEK_API_KEY=sua_chave_aqui
 ```
 
-## 🔄 Próximos Passos
-- Adicionar tratamento mais robusto de erros
-- Implementar histórico de conversação
-- Adicionar suporte a parâmetros como `temperature` e `max_tokens`
+### Execução
+
+```bash
+python script_teste_deepseek.py
+```
+
+## 📦 Exemplo de resposta esperada
+
+Se tudo estiver certo, você verá algo como:
+
+```
+✅ Tudo certo! Resposta recebida:
+{'id': '...', 'object': 'chat.completion', 'choices': [...], 'usage': {...}}
+```
+
+Se houver erro, o script explicará o motivo com uma mensagem amigável, por exemplo:
+
+```
+🔐 Erro 401: Não autorizado. A chave da API pode estar errada ou ausente.
+📝 Detalhes técnicos: {"error":"Unauthorized"}
+```
+
+## 💡 Observações
+
+- O modelo usado no exemplo é `"deepseek-chat"`.
+- O script é útil para validações rápidas de chave de API, conectividade e resposta do modelo.
+- Pode ser adaptado facilmente para enviar mensagens mais complexas ou testar outros modelos da DeepSeek.
+
+## 📄 Licença
+
+Este projeto é open-source e pode ser modificado à vontade. Nenhuma licença específica foi definida.
