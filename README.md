@@ -1,90 +1,81 @@
-# 📝 **DeepSeek API Test**  
+# 📝 README - Teste da API DeepSeek
 
-Este repositório contém um script Python simples para testar a integração com a **API do DeepSeek Chat**.  
+## 🔍 Visão Geral
+Este script Python realiza uma integração básica com a API do DeepSeek Chat, enviando uma mensagem simples e recebendo uma resposta.
 
-🔗 **API Oficial**: [DeepSeek API Documentation](https://platform.deepseek.com/docs)  
+## 🛠️ Funcionamento do Código
 
----
+### 📚 Bibliotecas Utilizadas
+- `os`: Para acessar variáveis de ambiente
+- `requests`: Para fazer requisições HTTP
+- `python-dotenv`: Para carregar variáveis de um arquivo `.env`
 
-## 🚀 **Como Usar**  
+### ⚙️ Fluxo Principal
+1. **Configuração Inicial**:
+   - Carrega variáveis do arquivo `.env` usando `load_dotenv()`
+   - Obtém a chave da API com `os.getenv("DEEPSEEK_API_KEY")`
 
-### **Pré-requisitos**  
-- Python 3.6+  
-- Biblioteca `requests` instalada  
-- Uma **chave de API válida** do DeepSeek  
+2. **Preparação da Requisição**:
+   - Define os cabeçalhos (headers) com a autorização Bearer Token
+   - Monta o payload (corpo da requisição) com:
+     - Modelo: `deepseek-chat`
+     - Mensagem: "Olá, DeepSeek!"
 
-### **Instalação**  
-1. Clone este repositório:  
+3. **Envio e Tratamento da Resposta**:
+   - Faz uma requisição POST para `https://api.deepseek.com/chat/completions`
+   - Trata três cenários:
+     - Sucesso (status 200): exibe a resposta JSON
+     - Erro da API: exibe o código e mensagem de erro
+     - Erro de conexão: exibe a exceção
+
+## 🚀 Como Usar
+
+1. **Instale as dependências**:
    ```bash
-   git clone https://github.com/seu-usuario/deepseek-api-test.git
-   cd deepseek-api-test
+   pip install requests python-dotenv
    ```
 
-2. Instale as dependências:  
+2. **Crie um arquivo `.env`** na raiz do projeto:
+   ```env
+   DEEPSEEK_API_KEY="sua_chave_aqui"
+   ```
+
+3. **Execute o script**:
    ```bash
-   pip install requests
+   python nome_do_script.py
    ```
 
-3. Adicione sua chave de API no arquivo `deepseek_api_test.py`:  
-   ```python
-   api_key = "sua_chave_de_api_aqui"  # Substitua pela sua chave
-   ```
+## ⚠️ Importante
+- Mantenha seu arquivo `.env` seguro e fora do controle de versão
+- Adicione `.env` ao seu `.gitignore`
+- Nunca compartilhe sua chave de API publicamente
 
----
+## 📊 Saídas Esperadas
 
-## 🛠 **Executando o Script**  
-
-Execute o script Python:  
-```bash
-python deepseek_api_test.py
-```
-
-### **Possíveis Saídas**  
-✅ **Conexão bem-sucedida**:  
+✅ **Resposta de sucesso**:
 ```json
-Resposta da API: {"id": "chatcmpl-123", "object": "chat.completion", "choices": [...]}
+Resposta: {
+  "id": "chatcmpl-123",
+  "object": "chat.completion",
+  "choices": [...],
+  "usage": {...}
+}
 ```
 
-❌ **Erro de autenticação/saldo**:  
+❌ **Possíveis erros**:
+- `401 Unauthorized`: Chave API inválida
+- `429 Too Many Requests`: Limite de requisições excedido
+- `ConnectionError`: Problemas de conexão com a API
+
+## 📁 Estrutura Recomendada
 ```
-Erro na API. Status Code: 403  
-Detalhes do erro: {"error": {"message": "Insufficient Balance", "type": "unknown_error"}}
+projeto/
+├── .env            # Arquivo com sua chave (local apenas)
+├── .gitignore      # Deve conter `.env`
+└── script.py       # Este código
 ```
 
-❌ **Erro de conexão**:  
-```
-Falha na conexão com a API: ConnectionError(...)
-```
-
----
-
-## 🔧 **Solução de Problemas**  
-
-| **Erro**                     | **Causa**                          | **Solução**                          |
-|-------------------------------|------------------------------------|--------------------------------------|
-| `Insufficient Balance`        | Saldo insuficiente na conta        | Recarregue créditos no painel da API |
-| `Invalid API Key`             | Chave de API incorreta             | Verifique e atualize a chave         |
-| `ConnectionError`             | Falha na rede/URL incorreta        | Verifique a URL e sua conexão        |
-
----
-
-## 📌 **Notas Importantes**  
-💡 Caso a API esteja indisponível, verifique o [status oficial do DeepSeek](https://status.deepseek.com).  
-
----
-
-## 📜 **Licença**  
-MIT License. Consulte o arquivo [LICENSE](LICENSE) para mais informações.  
-
----
-
-Feito com ❤️ por [Vitor Gomes](https://github.com/sVitorgomes823).  
-🔗 **Contribuições são bem-vindas!** 🚀  
-
---- 
-
-### 🔎 **Próximos Passos**  
-- [ ] Adicionar suporte a streaming de respostas  
-- [ ] Implementar histórico de conversação  
-- [ ] Adicionar mais parâmetros (`temperature`, `max_tokens`)  
-
+## 🔄 Próximos Passos
+- Adicionar tratamento mais robusto de erros
+- Implementar histórico de conversação
+- Adicionar suporte a parâmetros como `temperature` e `max_tokens`
